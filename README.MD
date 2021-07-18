@@ -3,6 +3,8 @@
 
 This is a simple script to see whether a GitHub name is available or taken.
 
+<img alt="NodeJS" src="https://img.shields.io/badge/node.js-%2343853D.svg?style=for-the-badge&logo=node-dot-js&logoColor=white"/>
+
 ---
 
 ### How to Use
