@@ -110,3 +110,6 @@ class Task {
 for (let i = 0; i < config.tasks; i++) {
     new Task({ id: i + 1});
 }
+
+
+

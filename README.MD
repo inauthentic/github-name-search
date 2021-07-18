@@ -9,7 +9,8 @@ This is a simple script to see whether a GitHub name is available or taken.
 1. Download or clone this repository.
 2. Run `npm install` to download all necessary packages,
 3. Add proxies to `proxy.txt` file.
-4. Run `node index.js` to start.
+4. Navigate to the `config.json` file and edit the `tasks` count to how many tasks/instances you would like to run.
+5. Run `node index.js` to start.
 ---
 ### MIT License
 
