@@ -4,13 +4,19 @@ const request = require('request-promise');
 const randomWords = require('random-words');
 const config = require('./config.json');
 const chalk = require('chalk');
+const setTerminalTitle = require('set-terminal-title');
+const { ansi } = require('chalk');
 require('console-stamp')(console, { pattern: 'HH:MM:ss.l' });
 
 const proxies = [];
 fs.readFileSync(__dirname + '/proxy.txt', 'utf-8')
         .split(/\r?\n/)
         .forEach((line) => proxies.push(line));
-console.log("Welcome to the Github account name availability checker.")
+console.log(chalk.green(" [+] Welcome to the Github account name availability checker."));
+
+var tName = 0;
+var aName = 0;
+var errName = 0;
 
 class Task {
     constructor(props) {
@@ -82,12 +88,15 @@ class Task {
             });
             if (response.statusCode == 404) {
                 console.log(chalk.green(` [Github] [ID: ${this.id}]     `) +   `Account name available! Name used: ${this.accName}. Proxy used: ${this.proxy}`);
+                ++aName;
             }
             else if (response.statusCode != 404) {
                 console.log(chalk.red(` [Github] [ID: ${this.id}]       `) +   `Account taken. Name used: ${this.accName}. Proxy used: ${this.proxy}`);
+                ++tName;
             }
         } catch (err) {
             console.log(chalk.yellow(` [Github] [ID: ${this.id}]       `) + `Error has occured! Proxy used: ${this.proxy}`);
+                ++errName;
             
 			if (!proxies.length) {
 				console.error(`(ID ${this.id}) Out of Proxies!`);
@@ -95,9 +104,9 @@ class Task {
 			}
             this.sleep(2500);
         }
+        setTerminalTitle(`GitHub Name Search by: Inauthentic | Tasks: (${config.tasks}) Taken: (${tName}) Available: (${aName}) Errors: (${errName}) `, { verbose: false });
     }
 }
-
 for (let i = 0; i < config.tasks; i++) {
     new Task({ id: i + 1});
 }
