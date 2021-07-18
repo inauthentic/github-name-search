@@ -36,7 +36,6 @@ class Task {
 	}
 	formatProxy(proxy) {
 		if (!proxy || proxy.replace(/\s/g, '') == '') return null;
-
 		let proxySplit = proxy.split(':');
 
 		if (proxySplit.length > 2) {
